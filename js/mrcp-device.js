@@ -8,8 +8,8 @@ async function BLEconnect(){
   try {
     console.log('Requesting Bluetooth Device...');
     device  = await navigator.bluetooth.requestDevice({
-        //filters: [{services: ['6e400001-b5a3-f393-e0a9-e50e24dcca9e']}]});
-        acceptAllDevices: true, optionalServices: ['6e400001-b5a3-f393-e0a9-e50e24dcca9e']});
+        filters: [{services: ['6e400001-b5a3-f393-e0a9-e50e24dcca9e']}]});
+        //acceptAllDevices: true, optionalServices: ['6e400001-b5a3-f393-e0a9-e50e24dcca9e']});
   
     console.log('Connecting to GATT Server...');
     const server = await device.gatt.connect();
@@ -47,6 +47,7 @@ async function buttonPress(){
 
 function handleLedStatusChange(event){
   var status = document.querySelector('#device_status');
+  status.style.display = 'block';
   let decoder = new TextDecoder("utf-8");
   led_on = parseInt(decoder.decode(event.target.value)) == 1;
   button.innerHTML = led_on ? 'OFF' : 'ON';

@@ -29,6 +29,7 @@ div.panel{
       position: absolute;
       right: 25px;
       top: 25px;
+      display: none;
   }
 
   div.section{
