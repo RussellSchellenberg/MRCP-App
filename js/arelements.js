@@ -25,8 +25,8 @@ AFRAME.registerComponent('panel', {
 {
     var vector = new THREE.Vector3();
 
-    var widthHalf = 0.5*canvas.width;
-    var heightHalf = 0.5*canvas.height;
+    var widthHalf = 0.5*canvas.clientWidth;
+    var heightHalf = 0.5*canvas.clientHeight;
 
     obj.updateMatrixWorld();
     vector.setFromMatrixPosition(obj.matrixWorld);
