@@ -3,23 +3,55 @@
 <script src="js/aframe.min.js"></script>
 <script src="js/arjs.min.js"></script>
 <script src="js/arelements.js"></script>
+<script src="js/mrcp-device.js"></script>
 <link rel="stylesheet" type="text/css" href="css/style.css">
   <body>
-      <div id="test-panel" class="panel">
-              <h1 style="text-align: center;margin:0px">ESP32 LED</h1>
-              <hr style="width:100%;border-top: 1px solid">
-              <div id="device_status"></div>
-              <div class="section">
-                <button id="device_button" style="font-size: 48px" onclick="buttonPress();">CONNECT</button>
-              </div>
-      </div>
     <a-scene embedded arjs='debugUIEnabled: false;detectionMode: mono_and_matrix; matrixCodeType: 4x4;' vr-mode-ui="enabled: false">
-      <a-marker emitevents="true" type='barcode' value='212'>
-          <a-entity panel class="screen" id="panel"></a-entity>
+      <a-marker emitevents="true" type='barcode' value='0'>
+          <a-entity panel class="screen">
+            <div id="test-panel" class="panel" data-offset="0 0 0">
+                <h1 style="text-align: center;margin:0px">Smart Lock</h1>
+                <hr style="width:100%;border-top: 1px solid">
+                <div id="device_status"></div>
+                <div class="section">
+                  <button id="device_button" style="font-size: 48px" onclick="mrcp_lock.buttonPress(this);">CONNECT</button>
+                </div>
+            </div>
+          </a-entity>
+          <a-box position='0 0 0' material='opacity: 0.5; side: double;color:pink;'></a-box>
+      </a-marker>
+      <a-marker type='barcode' value='1'>
+          <a-entity panel class="screen">
+              <div id="test-panel" class="panel" data-offset="0 0 0">
+                  <h1 style="text-align: center;margin:0px">Vending Machine</h1>
+                  <hr style="width:100%;border-top: 1px solid">
+                  <div class="section">
+                    <button id="device_button" style="font-size: 48px" onclick="window.mrcp_lock.buttonPress();">CONNECT</button>
+                  </div>
+              </div>
+            </a-entity>
+          <a-entity panel class="screen">
+            <button class="anchored single-button on-connect " data-offset="1 0 -1.5"></button>
+            <button class="anchored single-button on-connect " data-offset="2 0 -1.5"></button>
+            <button class="anchored single-button on-connect " data-offset="3 0 -1.5"></button>
+            <button class="anchored single-button on-connect " data-offset="4 0 -1.5"></button>
+            <button class="anchored single-button on-connect " data-offset="1 0 -0.5"></button>
+            <button class="anchored single-button on-connect " data-offset="2 0 -0.5"></button>
+            <button class="anchored single-button on-connect " data-offset="3 0 -0.5"></button>
+            <button class="anchored single-button on-connect " data-offset="4 0 -0.5"></button>
+            <button class="anchored single-button on-connect " data-offset="1 0 0.5"></button>
+            <button class="anchored single-button on-connect " data-offset="2 0 0.5"></button>
+            <button class="anchored single-button on-connect " data-offset="3 0 0.5"></button>
+            <button class="anchored single-button on-connect " data-offset="4 0 0.5"></button>
+            <button class="anchored single-button on-connect " data-offset="1 0 1.5"></button>
+            <button class="anchored single-button on-connect " data-offset="2 0 1.5"></button>
+            <button class="anchored single-button on-connect " data-offset="3 0 1.5"></button>
+            <button class="anchored single-button on-connect " data-offset="4 0 1.5"></button>
+          </a-entity>
+          <a-box position='0 0 0' material='opacity: 0.5; side: double;color:green;'></a-box>
       </a-marker>
       <!--<a-entity id="mouseCursor" cursor="rayOrigin: mouse;mouseCursorStylesEnabled: false" raycaster="objects: .screen"></a-entity>-->
       <a-entity id="camera" camera></a-entity>
     </a-scene>
-    <script src="js/mrcp-device.js"></script>
   </body>
 </html>

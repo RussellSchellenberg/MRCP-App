@@ -1,21 +1,32 @@
 AFRAME.registerComponent('panel', {
     init: function () {
-      this.parent = document.querySelector('a-marker').object3D;
-      this.shadow = document.querySelector('#test-panel');
+      this.parent = this.el.parentElement.object3D;
+      console.log(this.parent);
       this.canvas = document.querySelector('canvas');
+      this.children = [].slice.call(this.el.children);
+      for(let child of this.children){
+        document.body.insertBefore(child, document.body.firstChild);
+      };
     },
     tick: function(time, timeDelta){
-    this.el.object3D.rotation = this.el.object3D.lookAt(camera.object3D.position);
-      
-    const screenPos = toScreenPosition(this.el.object3D, this.canvas)
-    const scale = getScreenScale(1/this.parent.position.length())*4;
-  
-    this.shadow.style.transform = `translate(-50%, -50%) translate(${screenPos.x}px,${screenPos.y}px) scale(${scale})`;
-    if(this.parent.visible == true){
-      this.shadow.style.display="flex";
-    }else{
-      this.shadow.style.display="none";
-    }
+    const canvas = this.canvas;
+    const parent = this.parent;
+    for(let child of this.children){
+      let obj = new THREE.Object3D();
+      let offset=child.dataset.offset.split(" ");
+      obj.position.set(offset[0], offset[1], offset[2]);
+      parent.add(obj);
+      let pos = toScreenPosition(obj, canvas);
+      scale = getScreenScale(1/parent.position.length())*4;
+      if(pos.x != NaN){
+        child.style.transform = `translate(-50%, -50%) translate(${pos.x}px,${pos.y}px) scale(${scale})`;
+      }
+      if(parent.visible == true){
+        child.style.display="flex";
+      }else{
+        child.style.display="none";
+      }
+    };
       },
   });
 
