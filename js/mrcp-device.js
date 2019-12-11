@@ -43,7 +43,7 @@ class MRCPLock{
       await this.BLEconnect();
     }else{
       let encoder = new TextEncoder('utf-8');
-      let sendMsg = encoder.encode((this.led_on ? 'Unlock' : 'Lock').toString());
+      let sendMsg = encoder.encode((this.led_on ? 'OFF' : 'ON').toString());
       console.log('Writing Characteristic...');
       this.button.innerHTML = 'Loading';
       await this.characteristic_tx.writeValue(sendMsg);
